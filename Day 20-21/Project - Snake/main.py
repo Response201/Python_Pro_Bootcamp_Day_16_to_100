@@ -13,14 +13,10 @@ screen.tracer(0)
 
 game = Game()
 snake = game
-food = game
 
 
 # Aktivera tangentlyssning
 screen.listen()
-
-# Visa startpoäng
-game.create_score_text()
 
 # Registrera kontroller för ormen
 screen.onkey(snake.go_up, "Up")
