@@ -4,6 +4,7 @@ SNAKE_STARTING_POSITION= [(10,0), (0, 0), (-10,0), (-20,0)]
 
 class Snake:
     def __init__(self):
+        super().__init__()
         self.snake = []
         self.dx = 10
         self.dy = 0

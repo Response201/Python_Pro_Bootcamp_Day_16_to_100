@@ -1,6 +1,5 @@
 import time
 from turtle import *
-from snake import Snake
 from food import Food
 from game import Game
 
@@ -11,8 +10,8 @@ screen.setup(600,600)
 screen.tracer(0)
 
 game = Game()
-snake = Snake()
-food = Food()
+snake = game
+food = game
 
 
 # Aktivera tangentlyssning
@@ -28,29 +27,22 @@ screen.onkey(snake.go_right, "Right")
 screen.onkey(snake.go_down, "Down")
 
 
-
-
-
 game_active = True
 
 while game_active:
     screen.update()
-    time.sleep(0.2)
+    time.sleep(0.1)
     snake.move_snake()
 
     # Game over - träffar en vägg eller ormen kolliderar med sig själv
-    game_active = game.game_over(snake.snake, snake.snake_head_x, snake.snake_head_y)
+    game_active = game.game_over()
 
 
     # +1 poäng om ormen fångar maten
-    if food.food_position_x == snake.snake_head_x and food.food_position_y == snake.snake_head_y :
-        food.new_position_food()
-        snake.add_snake_part()
-        game.score +=1
-        game.write_score()
+    game.check_food_eaten()
 
 
-# När spelet är slut, visa Game Over-text
+# När spelet är slut - while-loopen stoppas, visas Game Over-text
 game.game_over_text()
 
 screen.mainloop()
