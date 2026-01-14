@@ -12,13 +12,10 @@ class Game(ScoreBoard,TextWriter,Snake, Food):
 
 # Kollar om maten tagits
    def check_food_eaten(self):
-       if self.snake_head_x == self.food_position_x and self.snake_head_y == self.food_position_y:
+       if self.snake_head_x == self.food_item.xcor() and self.snake_head_y == self.food_item.ycor():
            self.add_snake_part()
            self.new_position_food()
-           self.food_position_x = self.food_item.xcor()
-           self.food_position_y = self.food_item.ycor()
            self.increment_score()
-
 
 
 # Visar "game over" på skärmen med en Turtle
