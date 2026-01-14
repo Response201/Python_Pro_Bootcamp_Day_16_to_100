@@ -1,8 +1,10 @@
+import random
 from turtle import *
-SNAKE_STARTING_POSITION= [(10,0), (0, 0), (-10,0), (-20,0)]
 
+SNAKE_STARTING_POSITION= [(10,0), (0, 0), (-10,0)]
+from food import *
 
-class Snake:
+class Snake(Food):
     def __init__(self):
         super().__init__()
         self.snake = []
@@ -13,25 +15,26 @@ class Snake:
         self.snake_head_x=10
         self.snake_head_y =0
 
+
+    def snake_customize(self,snake_part, get_color):
+        snake_part.shape("square")
+        snake_part.color(get_color)
+        snake_part.shapesize(0.5)
+        snake_part.penup()
+
     # Skapar orm
     def create_snake(self):
         for body_part in SNAKE_STARTING_POSITION:
             snake_part = Turtle()
-            snake_part.color("white")
-            snake_part.shape("square")
-            snake_part.shapesize(0.5)
-            snake_part.penup()
+            random_color = self.random_color()
+            self.snake_customize(snake_part,random_color)
             snake_part.goto(body_part[0], body_part[1])
             self.snake.append(snake_part)
 
     # Lägger till nytt segment när ormen äter mat
     def add_snake_part(self):
-
                 snake_part = Turtle()
-                snake_part.color("white")
-                snake_part.shape("square")
-                snake_part.shapesize(0.5)
-                snake_part.penup()
+                self.snake_customize(snake_part, self.colors)
                 snake_part.goto(self.snake[-1].xcor() , self.snake[-1].ycor() )
                 self.snake.append(snake_part)
 

@@ -5,7 +5,9 @@ from game import Game
 
 # Skapa och konfigurera spelrutan
 screen = Screen()
+screen.colormode(255)
 screen.bgcolor("black")
+
 screen.setup(600,600)
 screen.tracer(0)
 

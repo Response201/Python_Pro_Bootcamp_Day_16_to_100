@@ -1,7 +1,6 @@
 from turtle import *
 from snake import *
 from food import *
-
 class Game(Snake, Food):
 
    def __init__(self):
@@ -9,13 +8,13 @@ class Game(Snake, Food):
        self.score= 0
        self.score_item =[]
 
-
+# Kollar om maten tagits
    def check_food_eaten(self):
        if self.snake_head_x == self.food_position_x and self.snake_head_y == self.food_position_y:
+           self.add_snake_part()
            self.new_position_food()
            self.food_position_x = self.food_item.xcor()
            self.food_position_y = self.food_item.ycor()
-           self.add_snake_part()
            self.score += 1
            self.write_score()
 
