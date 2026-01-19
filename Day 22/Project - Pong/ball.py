@@ -24,7 +24,6 @@ class Ball:
 
     # Återställ bollens position till mitten av spelplanen
     def restart(self):
-
         self.ball.goto(0,0)
 
     # Byt riktning i y-led (studsa mot övre/nedre vägg)
@@ -33,7 +32,7 @@ class Ball:
 
     # Byt riktning i x-led (studsa mot paddel)
     def bounce_paddle(self):
-        self.dir_x *= -1
+        self.dir_x *= -1.2
 
     # Uppdatera bollens position baserat på riktning
     def move_ball(self):

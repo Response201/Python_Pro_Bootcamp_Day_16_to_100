@@ -55,8 +55,8 @@ while game_on:
     player_two.check_hit_ball()
 
 
-    # Kollar om någon av spelarna fått 3 poäng = vinner
-    if player_one.scoreboard.score >= 3 or player_two.scoreboard.score >= 3:
+    # Kollar om någon av spelarna fått 5 poäng = vinner
+    if player_one.scoreboard.score >= 5 or player_two.scoreboard.score >= 5:
         winner = "Player 2"
         if player_one.scoreboard.score >  player_two.scoreboard.score:
             winner ="Player 1"
