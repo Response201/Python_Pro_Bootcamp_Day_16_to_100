@@ -4,12 +4,14 @@ class ScoreBoard(TextWriter):
     def __init__(self):
         super().__init__()
         self.score = 0
+        with open("data.txt") as file:
+            self.high_score = int(file.read())
         self.write_score()
 
     # Skriver ut poäng
     def write_score(self):
         self.clear()
-        self.write_text(f"Score: {self.score}", 0, 260, 16, "normal")
+        self.write_text(f"Score: {self.score} High Score: {self.high_score}", 0, 260, 16, "normal")
 
     # Ökar och skriver ut poäng
     def increment_score(self):

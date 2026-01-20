@@ -18,9 +18,32 @@ class Game(ScoreBoard,TextWriter,Snake, Food):
            self.increment_score()
 
 
+
+    # Startar om spelet
+   def reset_game(self):
+
+        # Sparar nytt high score om nuvarande poäng är högre
+        if self.score > self.high_score:
+            self.high_score = self.score
+            with open("data.txt", mode="w") as file:
+                file.write(f"{self.score}")
+
+        # Nollställer poängen och uppdaterar poängvisningen
+        self.score = 0
+        self.write_score()
+
+        # Flyttar bort alla delar av ormen från spelplanen
+        for i in self.snake:
+            i.goto(1000, 1000)
+
+        # Tömmer listan och skapar en ny orm
+        self.snake.clear()
+        self.create_snake()
+
+
 # Visar "game over" på skärmen med en Turtle
-   def game_over_text(self):
-       self.write_text("GAME OVER", 0, 0, 24, "bold")
+#   def game_over_text(self):
+#      self.write_text("GAME OVER", 0, 0, 24, "bold")
 
 
 # Kontrollerar om spelet är över. Ormen träffar en vägg eller sig själv
@@ -33,7 +56,8 @@ class Game(ScoreBoard,TextWriter,Snake, Food):
            self.snake_head_x >= pos_screen or
            self.snake_head_y  <= neg_screen or
            self.snake_head_y >= pos_screen) :
-           return False
+           #return False
+                self.reset_game()
 
        # Kontrollera om ormens huvud kolliderar med någon del av kroppen
        for item in self.snake[1:]:
@@ -41,6 +65,6 @@ class Game(ScoreBoard,TextWriter,Snake, Food):
                     y = item.ycor()
                     if x == self.snake_head_x and y == self.snake_head_y:
 
-                        return False
+                        #return False
+                        self.reset_game()
 
-       return True

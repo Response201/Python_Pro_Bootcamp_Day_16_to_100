@@ -32,8 +32,10 @@ while game_active:
     time.sleep(0.1)
     snake.move_snake()
 
-    # Game over - träffar en vägg eller ormen kolliderar med sig själv
-    game_active = game.game_over()
+
+    # Omstart av spel - träffar en vägg eller ormen kolliderar med sig själv
+    # game_active = game.game_over()
+    game.game_over()
 
 
     # +1 poäng om ormen fångar maten
@@ -41,6 +43,6 @@ while game_active:
 
 
 # När spelet är slut - while-loopen stoppas, visas Game Over-text
-game.game_over_text()
+# game.game_over_text()
 
 screen.mainloop()
