@@ -24,7 +24,16 @@ while len(states_correct) < len(data):
 
     # Om användaren trycker på "cancel" avslutas spelet
     if find_state_input is None:
-        screen.bye()
+        screen.tracer(0)
+
+        # Går igenom alla stater från cvs-fil och hantera de som inte hittats (sparats i listan states_correct)
+        for state in data["state"]:
+            if state not in states_correct:
+                    create_label.data = data[data.state == state]
+                    create_label.not_found_labels()
+
+
+        screen.update()
         break
 
 
