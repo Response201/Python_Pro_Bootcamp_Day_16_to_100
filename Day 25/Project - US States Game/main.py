@@ -27,8 +27,10 @@ while len(states_correct) < len(data):
         screen.tracer(0)
 
         # Går igenom alla stater från cvs-fil och hantera de som inte hittats (sparats i listan states_correct)
-        for state in data["state"]:
-            if state not in states_correct:
+        missing_states = [state for state in data["state"] if state not in states_correct]
+
+        for state in missing_states:
+
                     create_label.data = data[data.state == state]
                     create_label.not_found_labels()
 
@@ -41,7 +43,6 @@ while len(states_correct) < len(data):
 
     # Kontrollerar att delstaten inte redan gissats
     if find_state not in states_correct:
-
 
         # Om delstaten finns kommer längden att vara större än 0
         existing_state_row = data[data.state == find_state]
