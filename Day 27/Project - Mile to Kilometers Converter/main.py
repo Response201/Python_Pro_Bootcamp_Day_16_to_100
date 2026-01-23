@@ -12,7 +12,7 @@ for i in range(12):  # 0–11 = 12 kolumner
 
 
 
-# Konverterar miles till km och uppdaterar result_label med värdet
+# Konverterar miles till km och uppdaterar result_label
 def convert_miles_to_km():
     mile_text = input_mile.get()
     try:
