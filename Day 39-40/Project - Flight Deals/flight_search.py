@@ -24,7 +24,7 @@ class FlightSearch:
         data = response.json()
         return  data["access_token"]
 
-
+    # Hämtar detaljerad information om en stad från API: namn, IATA-kod och land
     def get_destination_info(self, city):
         header = {"Authorization": f"Bearer {self._token}"}
         params = {
