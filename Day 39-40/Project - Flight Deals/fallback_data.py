@@ -1,56 +1,69 @@
-[
+import os
+from dotenv import load_dotenv
+load_dotenv()
+EMAIL=  os.getenv("EMAIL")
+
+users_fallback = [
+
+    {"firstname": "Molly", "lastname": "Johansson", "email": EMAIL, "id": 1},
+    {"firstname": "Polly", "lastname": "User", "email": EMAIL, "id": 2},
+]
+
+
+
+price_fallback = [
     {
         "city": "Paris",
         "iataCode": "PAR",
-        "lowestPrice": 54,
+        "lowestPrice":10000,
         "id": 2
     },
     {
         "city": "Frankfurt",
         "iataCode": "FRA",
-        "lowestPrice": 42,
+        "lowestPrice": 234.94,
         "id": 3
     },
     {
         "city": "Tokyo",
         "iataCode": "TYO",
-        "lowestPrice": 744.14,
+        "lowestPrice": 551.84,
         "id": 4
     },
     {
         "city": "Hong Kong",
         "iataCode": "HKG",
-        "lowestPrice": 699.01,
+        "lowestPrice": 408.61,
         "id": 5
     },
     {
         "city": "Istanbul",
         "iataCode": "IST",
-        "lowestPrice": 216.52,
+        "lowestPrice": 147.14,
         "id": 6
     },
     {
         "city": "Kuala Lumpur",
         "iataCode": "KUL",
-        "lowestPrice": 541.09,
+        "lowestPrice": 547.41,
         "id": 7
     },
     {
         "city": "New York",
         "iataCode": "NYC",
-        "lowestPrice": 408.05,
+        "lowestPrice": 385.63,
         "id": 8
     },
     {
         "city": "San Francisco",
         "iataCode": "SFO",
-        "lowestPrice": 603.87,
+        "lowestPrice": 480.64,
         "id": 9
     },
     {
         "city": "Dublin",
         "iataCode": "DBN",
-        "lowestPrice": 10000,
+        "lowestPrice": 240,
         "id": 10
     }
 ]

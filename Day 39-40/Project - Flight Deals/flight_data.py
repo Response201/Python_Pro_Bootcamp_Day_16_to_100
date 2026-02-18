@@ -1,55 +1,43 @@
-import os
-import requests
-from dotenv import load_dotenv
 import datetime as dt
-from flight_search import FlightSearch
-load_dotenv()
-OFFERS_FLIGHT_URL = os.getenv("OFFERS_FLIGHT_URL")
 
 
-class FlightData(FlightSearch):
+
+
+class FlightData():
     def __init__(self):
        super().__init__()
        self.price = "N/A"
        self.origin_airport = "N/A"
        self.destination_airport = "N/A"
        self.departure_time="N/A"
-       self.departure_date = (dt.datetime.now() + dt.timedelta(days=7)).strftime("%Y-%m-%d")
+       self.departure_date = (dt.datetime.now() + dt.timedelta(days=1)).strftime("%Y-%m-%d")
        self.return_date = (dt.datetime.now() + dt.timedelta(days=30)).strftime("%Y-%m-%d")
-
+       self.is_direct=False
+       self.stops = "N/A"
 
 
     # Hittar den billigaste flygresan och uppdaterar pris och avgångstid
-    def find_cheapest_flight(self):
+    def find_cheapest_flight(self, data=None):
 
-       token = self._token
-       from_date = self.departure_date
-       to_date = self.return_date
+        if   len(data) >= 1 :
 
-       params = {
-            "originLocationCode": self.origin_airport,
-            "destinationLocationCode": self.destination_airport,
-            "departureDate": from_date,
-            "returnDate": to_date,
-            "adults": 1,
-            "max": 5
-        }
-       headers = {
-           "Authorization": f"Bearer {token}"
-       }
+               for item in range(len(data)):
+                   if self.price == "N/A" or float(data[item]["price"]["total"]) and float(
+                           data[item]["price"]["total"]) < float(self.price):
 
-       response = requests.get(OFFERS_FLIGHT_URL, headers=headers, params=params)
-       data = response.json()
+                       self.price = float(data[item]["price"]["total"])
+                       date = data[item]["itineraries"][0]["segments"][0]["departure"]["at"]
+                       self.departure_time = date.split("T")[1][:5]
 
-       if len(data["data"]) >= 1:
-             for item in range(len(data)):
-                 if  self.price == "N/A" or float(data["data"][item]["price"]["total"]) and float(data["data"][item]["price"]["total"]) < self.price:
-                         self.price = float(data["data"][item]["price"]["total"])
-                         date = data["data"][item]["itineraries"][0]["segments"][0]["departure"]["at"]
-                         self.departure_time = date.split("T")[1][:5]
+                       nr_stops = len(data[item]["itineraries"][0]["segments"]) - 1
+                       self.stops= nr_stops
+                       self.destination_airport = data[item]["itineraries"][0]["segments"][nr_stops]["arrival"]["iataCode"]
 
-       else:
-                print(f"No flights: {self.origin_airport} - {self.destination_airport} ")
+        else:
+               print(f"❌ No flights: {self.origin_airport} - {self.destination_airport} ")
+
+
+
 
 
 
