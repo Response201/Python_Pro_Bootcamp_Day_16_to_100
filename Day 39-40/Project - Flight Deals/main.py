@@ -20,7 +20,7 @@ for row in get_func.data_prices:
         # Om ett nytt lägsta pris hittas uppdateras get_func.price
         get_func.check_flights()
 
-        # Om det nya priset är lägre än det gamla lägsta priset -> skicka sms, email och uppdatera excel-filen
+        # Om det nya priset är lägre än det gamla lägsta priset -> skicka sms, email och uppdaterar excel-fil
         if row["lowestPrice"] > get_func.price:
 
             get_func.send_sms()
