@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-import os
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -12,7 +11,7 @@ chrome_options.add_experimental_option("detach", True)
 
 
 
-class InternetSpeedTwitterBot:
+class InternetSpeedBot:
     def __init__(self):
         self.driver = webdriver.Chrome(options=chrome_options)
         self.up= 100

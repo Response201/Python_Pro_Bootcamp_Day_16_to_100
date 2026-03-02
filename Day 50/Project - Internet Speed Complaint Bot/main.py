@@ -1,8 +1,8 @@
-from internet_speed_bot import InternetSpeedTwitterBot
+from internet_speed_bot import InternetSpeedBot
 import time
 
 
-bot = InternetSpeedTwitterBot()
+bot = InternetSpeedBot()
 bot.get_internet_speed()
 
 # Om hastigheten är lägre än det utlovade, posta ett meddelande
