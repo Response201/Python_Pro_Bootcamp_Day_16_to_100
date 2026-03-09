@@ -1,0 +1,77 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+padding: 10rem 0;
+height:100vh;
+min-height fit-content ;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#2b2b2b;
+background-image: url("./images/background.jpg");
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+font-family:Arial, Helvetica, sans-serif;
+
+}
+
+/* visitkortet */
+
+.card{
+
+width:520px;
+max-width:90%;
+height:280px;
+background-color:#FFFFFF;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:3.5rem clamp(1rem,7vw, 3rem);
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
+
+}
+
+/* vänster sida */
+
+.card-left{
+display:flex;
+flex-direction:column;
+gap:0.5rem;
+
+}
+
+h1{
+
+font-size:clamp(1.25rem, 2vw, 2rem);
+
+}
+
+.title{
+
+font-size:1rem;
+color:gray;
+margin:0.5rem 0;
+font-size:clamp(0.8rem, 2vw, 1rem);
+
+}
+
+.contact{
+font-size:clamp(0.8rem, 2vw, 1rem);
+}
+
+
+
+.card-right img{
+
+width:clamp(100px, 15vw, 120px);
+aspect-ratio: 1 / 1;
+border-radius:50%;
+object-fit:cover;
+margin-top:1rem;
+}
