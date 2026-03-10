@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<!--
+	Twenty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="./static/assets/css/main.css" />
+
+	</head>
+	<body class="index is-preload">
+				<article id="main">
+						<section class="wrapper style3 container special">
+							<header class="major">
+								<h2>Djur som Överraskar – <strong>Saker du inte visste</strong></h2>
+							</header>
+
+							<div class="row">
+                                    {% for item in posts %}
+                                        <div class="col-6 col-12-narrower">
+									<section>
+										<a href="{{base_url}}/{{item.id}}" class="image featured"><img src="{{item.image}}" alt="" /></a>
+										<header>
+											<h3> {{item.title}}</h3>
+										</header>
+										<p>
+                                            {{item.subject}}
+                                        </p>
+									</section>
+
+								</div>
+                                    {% endfor %}
+							</div>
+						</section>
+				</article>
+	</body>
+</html>
