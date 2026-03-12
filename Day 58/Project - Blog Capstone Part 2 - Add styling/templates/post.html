@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Blog</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
+</head>
+
+<body class="index is-preload ">
+	{% include "navbar.html" %}
+	<article class="onePost">
+		<section class="wrapper style3 container special thisPost  ">
+			<header class="major">
+				<h2>{{post.title}}</h2>
+			</header>
+			<section class="post">
+				<div class="image featured post">
+					<img src="{{post.image}}" alt="" />
+				</div>
+				<header>
+				</header>
+				<p>
+					{{post.body}}
+				</p>
+			</section>
+		</section>
+	</article>
+</body>
+
+</html>
