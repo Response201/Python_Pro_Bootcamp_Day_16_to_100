@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Restaurants{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+
+      <h1>All Cafes</h1>
+
+	  <table class="table table-dark table-striped table-hover">
+  {% for row in cafes %}
+    <tr>
+    {% for item in row %}
+        <td>
+
+
+        {% if 'http' in item %}
+    <a href="{{ item }}">Link</a>
+{% else %}
+    {{ item }}
+{% endif %}
+
+
+
+        </td>
+    {% endfor %}
+    </tr>
+{% endfor %}
+
+
+  	  </table>
+
+      <p><a href="/">Return to index page</a></p>
+
+    </div>
+
+
+{% endblock %}
