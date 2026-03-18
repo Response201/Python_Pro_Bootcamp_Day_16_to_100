@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Library</title>
+  </head>
+  <body>
+    <h1>My Library</h1>
+
+    {% if not all_books   %}
+
+        <p>Library is empty.</p>
+
+    {% else %}
+
+
+            <ul>
+            {% for book in all_books %}
+                <li style="margin:1rem 0;" >
+
+             <div style="display:flex; align-items:center; justify-content:start; gap:1rem; ">
+
+    <div>
+        {{ book.title }} - {{ book.author }} - {{ book.rating }}/10
+    </div>
+
+    <div style="display:flex; gap:1rem">
+        <a href="/edit/{{book.id}}">
+            <button>Edit</button>
+        </a>
+
+        <form action="/delete" method="POST" style="margin:0;">
+            <button name="delete" value="{{book.id}}" type="submit">Delete</button>
+        </form>
+    </div>
+
+</div>
+
+                </li>
+            {% endfor %}
+                </ul>
+
+    {% endif %}
+
+
+    <a href="{{url_for('add')}}">Add New Book</a>
+  </body>
+</html>
