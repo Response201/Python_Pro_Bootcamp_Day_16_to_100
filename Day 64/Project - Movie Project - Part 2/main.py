@@ -36,7 +36,6 @@ def home():
 
 
 
-
 # Redigera en films betyg och recension
 @app.route("/edit/<movie_id>",  methods=["GET", "POST"])
 def edit(movie_id):
@@ -95,7 +94,6 @@ def search():
     list = data["results"]
 
     if form.validate_on_submit():
-        print(form.title.data)
 
         if list:
             return render_template("select.html", movie_list=list )
