@@ -1,0 +1,52 @@
+ <!-- Head-->
+  {% include "head.html" %}
+
+  <!-- Navbar-->
+  {% include "navbar.html" %}
+  <!-- Hero -->
+  <div class="position-relative overflow-hidden ">
+    <div class="d-flex min-vh-100 " lc-helper="video-bg">
+      <div style="z-index:2; background-color: rgba(0, 0, 0, 0.5);" class="position-absolute w-100 h-100  min-vh-100">
+      </div>
+      <video style="z-index:1;object-fit: cover; object-position: 50% 50%;"
+        class="position-absolute w-100 h-100 min-vh-100" autoplay="" preload="" muted="" loop="" playsinline="">
+        <source src="./static/videos/hero.mp4" type="video/mp4">
+      </video>
+      <div style="z-index:3 " class=" container   align-self-center text-center text-light col-md-8 offset-md-2">
+        <div class="lc-block  mb-4">
+          <div editable="rich">
+            <h1 class="display-1 fw-bolder">Välkommen</h1>
+          </div>
+        </div>
+        <div class="lc-block" style="max-width: 750px; margin: 0 auto;">
+          <div editable="rich">
+            <p class="lead  ">
+              Utforska vår blogg fylld med fascinerande fakta om djur och natur. Från havets majestätiska valar till
+              skogens små,
+              färgglada invånare – här får du spännande insikter, roliga lärdomar och inspirerande berättelser om
+              världen omkring oss.
+            </p>
+          </div>
+        </div>
+        <div class="lc-block pb-5">
+          <button type="button" class=" btn btn-light rounded-pill " style="z-index:3">
+            <a class="text-dark" style="text-decoration: none;" href="{{url_blog}}/add">Skapa nytt inlägg</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <section class="container text-center py-5 ">
+    <h2 class="mb-5">
+      Senaste blogg-inläggen
+    </h2>
+    <!-- Render blog post cards -->
+    {% include "display_cards.html" %}
+  </section>
+  </div>
+  </div>
+
+</body>
+</html>
