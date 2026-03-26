@@ -1,0 +1,48 @@
+      <main class="flex-grow-1 d-flex align-items-center justify-content-center" style="background: #f1f3f5;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card shadow-lg p-4 pt-0 rounded-4 border-0 my-2" style="background-color: #ffffff;">
+          <div class="card-body">
+
+            <form method="POST" action="" novalidate class="my-3">
+              {{ form.hidden_tag() }}
+<div >
+              {% for field in form %}
+                {% if field.type != 'CSRFTokenField' and field.type != 'SubmitField' %}
+                  <div class="mb-4">
+                    {{ field.label(class_="form-label mb-2") }}
+                    {{ field(class_="form-control ", placeholder=field.label.text) }}
+                    {% for error in field.errors %}
+                      <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+</div>
+
+
+              <!-- Flash -->
+<div class="text-center position-relative mt-4 pt-1 pb-1" style="min-height:25px;">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <p class="position-absolute top-0 start-50 translate-middle">
+            {{ message }}
+          </p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+</div>
+              <!-- Submit -->
+              <div class="d-grid pt-1">
+                {{ form.submit(class_="btn btn-secondary btn-lg rounded-pill") }}
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
