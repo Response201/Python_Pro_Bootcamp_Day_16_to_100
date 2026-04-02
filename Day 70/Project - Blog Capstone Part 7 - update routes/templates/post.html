@@ -1,0 +1,133 @@
+ <!-- Head-->
+  {% include "head.html" %}
+
+  <!-- Navbar-->
+  {% include "navbar.html" %}
+
+  <main >
+    <div class="container">
+      <div class="row justify-content-center flex-grow-1 d-flex align-items-end pt-5" style="height:70vh; min-height:fit-content; max-height: 1200px">
+        <div class="col-lg-6 ">
+
+          <!-- Title -->
+          <header class="mb-4  text-center">
+            <h1 class="fw-bolder">{{ post.title }}</h1>
+          </header>
+
+          <!-- Image -->
+          <figure class="mb-4">
+            <img class="img-fluid rounded" src="{{ post.image }}" alt="Blog image">
+          </figure>
+
+          <!-- Content -->
+          <section class="fs-5">
+            <p>{{ post.body }}</p>
+          </section>
+ {% if current_user.is_authenticated and current_user.id == post.author_id  %}
+            <section class="pb-2">
+
+             <button class=" btn btn-secondary btn-sm rounded-pill">
+                <a href="{{ url_for('blog_post', post_id=post.id )}}/edit" class="text-light" style="text-decoration: none;">
+                    Redigera
+                </a> </button>
+
+
+                <button class=" btn btn-secondary btn-sm  rounded-pill">
+                <a href="{{url_for('blog_post', post_id=post.id )}}/delete" class="text-light" style="text-decoration: none;" >
+                    Radera
+                </a> </button>
+
+
+            </section>
+
+{% endif %}
+
+
+        </div>
+
+      </div>
+
+<div class="row justify-content-center   d-flex align-items-center">
+
+
+<div class="col-lg-6   ">
+
+
+
+
+
+
+
+
+<!-- Form-->
+
+           {% if current_user.is_authenticated  %}
+     <div class="w-content rounded p-1 w-100">
+
+  {% from 'bootstrap5/form.html' import render_form %}
+
+       <form method="POST" action="" novalidate class="mt-4 mb-4">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-4">
+        {{ form.comment.label(class_="form-label mb-2") }}
+
+        {{ form.comment(class_="form-control") }}
+
+        {% for error in form.comment.errors %}
+            <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <!-- Submit -->
+    <div class="d-grid pt-1">
+        {{ form.submit(class_="btn btn-secondary btn-lg rounded-pill") }}
+    </div>
+</form>
+    </div>
+{% endif %}
+
+
+
+
+<!-- Comments -->
+<div class="my-3">
+{% for comment in comments %}
+  <div class="w-content rounded p-1 {% if loop.index0 % 2 == 0 %} bg-light {% else %} bg-white {% endif %}">
+      <p class="fa-xs pt-2">{{ comment.date }}</p>
+      <div class="d-flex flex-row gap-2">
+          <p>{{ comment.author.name.title() }}: {{ comment.comment }}</p>
+          {% if current_user.id == comment.author_id or current_user.id == comment.post.author_id %}
+              <a href="/comment/{{comment.id}}" style="text-decoration: none;">
+                  <i class="bi bi-trash3-fill fa-xs text-dark"></i>
+              </a>
+          {% endif %}
+      </div>
+  </div>
+{% endfor %}
+    </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+    </div>
+ </div>
+
+
+
+
+
+
+  </main>
+
+</body>
+</html>
+
