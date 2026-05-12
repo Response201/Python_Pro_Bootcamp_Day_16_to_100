@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Restaurants{% endblock %}
+
+{% block content %}
+
+<div class=" flex flex  px-5">
+
+    <div class="row">
+
+
+        <div class="col-12 col-md-4">
+            <h1>Sort</h1>
+            <form method="GET">
+                {{ render_form(form, novalidate=True) }}
+            </form>
+        </div>
+
+
+
+        <div class="col pt-5 pt-md-0">
+            <h1>All Cafes</h1>
+            <div class="overflow-auto" style="max-height: 80vh;">
+                {% for cafe in cafes %}
+                <a class="" style="all: unset; cursor:pointer" href="{{ url_for('home', cafe_id=cafe.id, **request.args) }}">
+                    {% include "card.html" %}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+        <div class="col-12 col-md-4 pt-5 pt-md-0">
+            <h1>Map</h1>
+            {% if selected_cafe %}
+            {% set cafe = selected_cafe %}
+            {% include "card.html" %}
+            {% endif %}
+            <iframe
+                    width="100%"
+                    height="450"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    src="{{ selected_cafe_map }}">
+            </iframe>
+        </div>
+
+
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+<div class="col-md-12 my-4">
+
+    <div class="card h-100 shadow">
+
+        <div class="position-relative overflow-hidden" style="height: 150px;">
+
+            <img
+                    src="{{ cafe.img_url }}"
+                    class="w-100 h-100"
+                    style="object-fit: cover;"
+                    alt="{{ cafe.name }}"
+                    onerror="this.src='https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1637&auto=format&fit=crop'"
+            >
+
+        </div>
+
+        <div class="card-body">
+            <div class="d-flex justify-content-between "><h5 class="card-title">
+                {{ cafe.name }}
+            </h5>
+
+
+                <div>
+
+                    {% if cafe.has_sockets %}
+                    <span>🔌</span>
+                    {% endif %}
+
+
+                    {% if cafe.has_toilet %}
+                    <span>🚻</span>
+                    {% endif %}
+
+
+                    {% if cafe.has_wifi %}
+                    <span>📶</span>
+                    {% endif %}
+
+
+                    {% if cafe.can_take_calls %}
+                    <span>📞</span>
+                    {% endif %}
+
+                </div>
+            </div>
+
+
+            <p class="card-text">
+                📍 {{ cafe.location }}
+            </p>
+
+            <p class="card-text">
+                ☕ {{ cafe.coffee_price }}
+            </p>
+
+
+        </div>
+
+    </div>
+
+</div>
