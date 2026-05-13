@@ -1,0 +1,7 @@
+<h3 class="h5 mb-3"> Create Todo </h3>
+
+<form action="{{ url_for('create') }}" method="POST">
+
+    {{ render_form(create_todo_form, novalidate=True) }}
+
+</form>

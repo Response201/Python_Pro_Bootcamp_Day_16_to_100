@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Todos{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row g-4">
+        <div class="col-12 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+
+                    {% include "filter_todos.html" %}
+
+                    <hr class="my-4">
+
+                    {% include "create_todo.html" %}
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+
+
+                        <h1 class="h3 mb-0">
+                            Todos
+                        </h1>
+
+                        <span class="badge text-bg-dark">
+                            {{ todos|length }} st
+                        </span>
+
+                    </div>
+                    <div  class="overflow-auto" style="max-height: 75vh;">
+
+                        {% for todo in todos %}
+
+                        {% include "card.html" %}
+
+                        {% else %}
+
+                        <div class="alert alert-light text-center">
+
+                            No todos
+
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

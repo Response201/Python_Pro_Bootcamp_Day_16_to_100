@@ -1,0 +1,54 @@
+{% set filters = [
+    {
+        "status": "todo_status",
+        "id": "doneToggle",
+        "icon_on": "bi-check-circle-fill",
+        "icon_off": "bi-circle",
+        "text_on": "All",
+        "text_off": "Pending",
+
+    },
+    {
+        "status": "sort_order_status",
+        "id": "sortToggle",
+        "icon_on": "bi-sort-down-alt",
+        "icon_off": "bi-sort-down",
+        "text_on": "Oldest first",
+        "text_off": "Newest first",
+
+    }
+] %}
+
+
+<form method="GET" class="d-flex align-items-center gap-4 flex-wrap">
+
+    {% for filter in filters %}
+
+        <div>
+            <input
+                type="checkbox"
+                name="{{ filter.status }}"
+                value="1"
+                class="btn-check  btn-sm"
+                id="{{ filter.id }}"
+                onchange="this.form.submit()"
+                {% if request.args.get(filter.status) %}checked{% endif %}
+            >
+
+            <label for="{{ filter.id }}">
+
+                {% if request.args.get(filter.status) %}
+                    <i class="bi {{ filter.icon_on }}"></i>
+                    {{ filter.text_on }}
+                {% else %}
+                    <i class="bi {{ filter.icon_off }}"></i>
+                    {{ filter.text_off }}
+                {% endif %}
+
+            </label>
+        </div>
+
+    {% endfor %}
+
+</form>
+

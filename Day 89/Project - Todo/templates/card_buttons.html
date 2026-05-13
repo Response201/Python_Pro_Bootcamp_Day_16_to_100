@@ -1,0 +1,28 @@
+{% set buttons = [
+    {
+        "name": "Status",
+        "url": url_for('status', todo_id=todo.id, **request.args),
+        "class": "btn btn-outline-success btn-sm"
+    },
+    {
+        "name": "Delete",
+        "url": url_for('delete_todo', todo_id=todo.id, **request.args),
+        "class": "btn btn-outline-danger btn-sm"
+    }
+] %}
+
+ <div class="d-flex gap-2 align-items-center my-2">
+
+    {% for button in buttons %}
+
+        <form method="POST" action="{{ button.url }}" class="d-inline">
+
+            <button type="submit" class="{{ button.class }}">
+                {{ button.name }}
+            </button>
+
+        </form>
+
+    {% endfor %}
+
+</div>
