@@ -1,0 +1,30 @@
+<div class="app">
+    <div class="app__header">
+        <h1 class="app__title">What The Hex</h1>
+
+        <p class="app__subtitle">
+            Ladda upp en bild och hitta de vanligaste färgerna.
+        </p>
+
+
+        <form class="upload" enctype="multipart/form-data" method="POST">
+
+            <label class="upload__button" for="file">
+                Välj bild
+            </label>
+
+            <input class="upload__input"
+                   id="file"
+                   name="imageUpload"
+                   onchange="this.form.submit()"
+                   type="file">
+        </form>
+
+
+        {% if error %}
+        <p class="error_message">{{ error }}</p>
+        {% endif %}
+
+
+    </div>
+</div>

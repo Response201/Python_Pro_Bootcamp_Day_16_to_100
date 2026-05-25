@@ -1,0 +1,15 @@
+{% if image_url and not error %}
+
+<div class="image-card">
+
+  <img class="image-card__img" src="{{ image_url }}">
+
+  <form class="image-card__actions">
+    <button class="image-card__button" type="submit">
+      Ta bort bild
+    </button>
+  </form>
+
+</div>
+
+{% endif %}

@@ -1,0 +1,18 @@
+{% if image_url and not error %}
+
+<div class="palette">
+
+  {% for color in image_color_palette %}
+
+    <div
+      class="palette__color"
+      style="background-color: rgb{{ color[0] }};"
+      data-color="rgb{{ color[0] }}"
+      onclick="copyColor(this)">
+    </div>
+
+  {% endfor %}
+
+</div>
+
+{% endif %}

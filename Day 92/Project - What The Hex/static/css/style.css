@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: rgb(180, 180, 180);
+  color: rgb(30, 30, 30);
+  height: 90vh;
+  padding: 2rem 0;
+  min-height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.app {
+  width: 90%;
+  max-width: 550px;
+  text-align: center;
+
+
+}
+
+.app__header {
+  background: rgb(210, 210, 210);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.app__title {
+  font-size: clamp(2.3rem, 5vw, 3.4rem);
+
+}
+
+.app__subtitle {
+  margin: 30px 0px;
+}
+
+
+
+/* UPLOAD INPUTS */
+.upload {
+  display: flex;
+  justify-content: center;
+}
+
+.upload__input {
+ display: none;
+}
+
+.upload__button {
+  display: inline-block;
+  padding: 10px 15px;
+  background:rgb(240, 240, 240);
+  color: black;
+  border-radius: 8px;
+   border: rgb(60, 60, 60) solid 1px;
+  cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+
+.upload__button:hover {
+ background-color:rgb(230, 230, 230);
+   transform: scale(0.99);
+}
+
+
+.error_message{
+padding-top:20px;
+font-weight:bold;
+}
+
+
+
+/* IMAGE CARD */
+.image-card {
+  height: 300px;
+  width: 90%;
+  max-width: 550px;
+  overflow: hidden;
+  position: relative;
+  margin: 30px  0;
+  border-radius: 20px;
+  border: rgb(60, 60, 60) solid 1px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.image-card__img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+
+
+/* REMOVE BUTTON */
+.image-card__actions {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 90%;
+  display: flex;
+  justify-content: end;
+}
+
+.image-card__button {
+  padding: 10px 10px;
+  border-radius: 0 0 20px 0;
+  border: rgb(60, 60, 60) solid 1px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.image-card__button:hover {
+  transform: scale(0.95);
+}
+
+
+
+
+
+/* PALETTE */
+.palette {
+  width: 90%;
+  max-width: 550px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.palette__color {
+  width: 8%;
+  aspect-ratio: 1/1;
+
+  border-radius: 6px;
+  border: rgb(60, 60, 60) solid 1px;
+
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.palette__color:hover {
+  transform: scale(0.95);
+}
+
+
+
+
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  border-radius: 8px;
+  opacity: 0;
+  padding: 20px 15px;
+
+  transform: translateY(10px);
+  transition: 0.3s ease;
+  pointer-events: none;
+
+  border: rgb(60, 60, 60) solid 1px;
+}
+
+.toast__text {
+  height: 0;
+  margin: 0 0 15px 0;
+  color: white;
+  mix-blend-mode: difference;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
