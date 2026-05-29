@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Random Cat Fact Generator 🐱</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1>🐱 Random Cat</h1>
+
+    <div class="card">
+        <div class="imageBox">
+            <img
+                    alt="cat"
+                    onerror="this.src='{{ url_for('static', filename='cat.jpg') }}'"
+                    src="{{ image_url or url_for('static', filename='cat.jpg') }}"
+            >
+        </div>
+
+        <div class="factBox">
+            <h2>Cat Fact</h2>
+             <p>{{ fact or "No cat fact available 😿" }}</p>
+        </div>
+
+        <form method="GET">
+            <button type="submit">New cat</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
