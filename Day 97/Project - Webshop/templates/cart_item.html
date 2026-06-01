@@ -1,0 +1,33 @@
+<div class="card mb-3 shadow-sm border-0">
+
+    <div class="card-body">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-4">
+                <strong class="mb-0 fs-4">
+                    {{ item.product.product }}
+                </strong>
+            </div>
+
+            <div class="col-md-2 text-center">
+
+                    Antal: {{ item.quantity }}
+
+            </div>
+            <div class="col-md-3 text-start">
+
+                    <strong>{{ item.product.price }} kr</strong>
+                {% if item.quantity > 1 %}
+                <small class="text-muted">
+                    ({{ item.quantity * item.product.price }} kr)
+                </small>
+                {% endif %}
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
