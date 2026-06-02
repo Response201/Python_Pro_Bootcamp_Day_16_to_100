@@ -1,9 +1,52 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
-
 {% block content %}
+ <h1 class="mb-4 pt-5">Home</h1>
+<div class="w-100 d-flex justify-content-end align-items-end gap-3 pb-1">
 
-<h1>Home</h1>
+
+    <form method="POST" class="gap-3">
 
 
+    <input type="hidden" name="current_sort_field" value="{{ sort_field }}">
+    <input type="hidden" name="current_sort_dir" value="{{ sort_dir }}">
+
+
+     <!-- field -->
+    <button name="sort_field" value="product"
+        class="btn btn-link p-0"
+        style="color: {% if sort_field == 'product' %}#343a40{% else %}#adb5bd{% endif %};">
+        <i class="bi bi-type"></i>
+    </button>
+
+    <button name="sort_field" value="price"
+        class="btn btn-link p-0"
+        style="color: {% if sort_field == 'price' %}#343a40{% else %}#adb5bd{% endif %};">
+        <i class="bi bi-currency-dollar"></i>
+    </button>
+
+
+         <!-- dir -->
+    <button name="sort_dir" value="asc"
+        class="btn btn-link p-0"
+        style="color: {% if sort_dir == 'asc' %}#343a40{% else %}#adb5bd{% endif %};">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <button name="sort_dir" value="desc"
+        class="btn btn-link p-0"
+        style="color: {% if sort_dir == 'desc' %}#343a40{% else %}#adb5bd{% endif %};">
+        <i class="bi bi-arrow-down"></i>
+    </button>
+
+
+</form>
+</div>
+
+
+  <div class="row">
+        {% for product in products %}
+            {% include "product_card.html" %}
+        {% endfor %}
+    </div>
 {% endblock %}

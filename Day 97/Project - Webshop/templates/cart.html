@@ -1,44 +1,31 @@
 {% extends "base.html" %}
-
 {% block title %}
 Varukorg
 {% endblock %}
-
 {% block content %}
-
-
-
 
    <h1 class="mb-4 pt-5">
         Varukorg
     </h1>
 
     {% if cart.items %}
-
         {% for item in cart.items %}
             {% include "cart_item.html" %}
         {% endfor %}
 
         <div class="card mt-4">
-
             <div class="card-body">
-
                 <strong class="fs-3">
                     Totalt:
                     {{ total_price }} kr
                 </strong>
-
             </div>
-
         </div>
 
     {% else %}
-
         <div class="alert alert-info">
             Varukorgen är tom.
         </div>
 
     {% endif %}
-
-
 {% endblock %}

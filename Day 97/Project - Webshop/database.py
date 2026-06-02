@@ -13,6 +13,7 @@ def database(app):
         __tablename__ = "product"
         id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
         product: Mapped[str] = mapped_column(String(40), nullable=False)
+        image: Mapped[str] = mapped_column(String(), nullable=False)
         price: Mapped[str] = mapped_column(Integer, nullable=False)
 
 

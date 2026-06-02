@@ -1,0 +1,27 @@
+<div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+
+        <div class="card-body">
+            <h5 class="card-title">
+                {{ product.product }}
+            </h5>
+
+            <p class="card-text">
+                {{ product.price }} kr
+            </p>
+        </div>
+
+
+        <div class="card-footer bg-white border-0">
+            <form method="POST"
+                  action="{{ url_for('add',product_id=product.id) }}">
+                   <input type="hidden" name="quantity" value="1">
+                <button class="btn btn-primary w-100">
+                   Add
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+</div>

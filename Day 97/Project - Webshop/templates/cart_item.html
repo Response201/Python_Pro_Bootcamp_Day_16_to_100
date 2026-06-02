@@ -1,7 +1,5 @@
 <div class="card mb-3 shadow-sm border-0">
-
     <div class="card-body">
-
         <div class="row align-items-center">
 
             <div class="col-md-4">
@@ -11,13 +9,11 @@
             </div>
 
             <div class="col-md-2 text-center">
-
-                    Antal: {{ item.quantity }}
-
+                Antal: {{ item.quantity }}
             </div>
-            <div class="col-md-3 text-start">
 
-                    <strong>{{ item.product.price }} kr</strong>
+            <div class="col-md-3 text-start">
+                <strong>{{ item.product.price }} kr</strong>
                 {% if item.quantity > 1 %}
                 <small class="text-muted">
                     ({{ item.quantity * item.product.price }} kr)
@@ -25,9 +21,37 @@
                 {% endif %}
             </div>
 
+            <div class="col-md-3">
+                <div class="btn-group gap-1">
 
+                    <!-- add -->
+                    <form method="POST" action="{{ url_for('add', product_id=item.product.id) }}">
+                        <input type="hidden" name="this_path" value="{{ request.path }}">
+                        <input type="hidden" name="quantity" value="1">
+                        <button class="btn btn-success">
+                            <i class="bi bi-plus"></i>
+                        </button>
+                    </form>
+
+                    <!-- remove -->
+                    <form method="POST" action="{{ url_for('remove', product_id=item.product.id) }}">
+                        <input type="hidden" name="this_path" value="{{ request.path }}">
+                        <button class="btn btn-warning">
+                            <i class="bi bi-dash"></i>
+                        </button>
+                    </form>
+
+                    <!-- delete -->
+                    <form method="POST" action="{{ url_for('delete', product_id=item.product.id) }}">
+                        <input type="hidden" name="this_path" value="{{ request.path }}">
+                        <button class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+
+
+                </div>
+            </div>
         </div>
-
     </div>
-
 </div>

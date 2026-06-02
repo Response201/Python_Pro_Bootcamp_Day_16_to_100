@@ -6,9 +6,9 @@ def seed_database(db, Product, Cart, CartItem):
     if not db.session.query(Product).first():
 
         db.session.add_all([
-            Product(product="Laptop", price=12000),
-            Product(product="Mus", price=299),
-            Product(product="Tangentbord", price=799),
+            Product(product="Laptop",image="https://images.pexels.com/photos/20487289/pexels-photo-20487289.jpeg", price=12000),
+            Product(product="Mus",image="https://images.pexels.com/photos/14363329/pexels-photo-14363329.jpeg", price=299),
+            Product(product="Tangentbord",image="https://images.pexels.com/photos/35471659/pexels-photo-35471659.jpeg", price=799),
         ])
         db.session.commit()
 
