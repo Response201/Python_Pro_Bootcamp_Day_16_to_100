@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block title %}
-Varukorg
+Cart
 {% endblock %}
 {% block content %}
 
    <h1 class="mb-4 pt-5">
-        Varukorg
+        Cart
     </h1>
 
     {% if cart.items %}
@@ -16,15 +16,14 @@ Varukorg
         <div class="card mt-4">
             <div class="card-body">
                 <strong class="fs-3">
-                    Totalt:
-                    {{ total_price }} kr
+                    Total: ${{ total_price }}
                 </strong>
             </div>
         </div>
 
     {% else %}
-        <div class="alert alert-info">
-            Varukorgen är tom.
+        <div class="alert">
+            The cart is empty
         </div>
 
     {% endif %}

@@ -1,27 +1,54 @@
 <div class="col-md-4 mb-4">
-    <div class="card h-100 shadow-sm">
+    <div class="card h-100 shadow-sm rounded overflow-hidden">
 
-        <div class="card-body">
-            <h5 class="card-title">
-                {{ product.product }}
-            </h5>
-
-            <p class="card-text">
-                {{ product.price }} kr
-            </p>
+        <div style="height: 300px; overflow: hidden;">
+            <img alt="product" class="w-100 h-100" src="{{product.image}}" style="object-fit: cover;">
         </div>
 
+        <div class="card-body ">
 
-        <div class="card-footer bg-white border-0">
-            <form method="POST"
-                  action="{{ url_for('add',product_id=product.id) }}">
-                   <input type="hidden" name="quantity" value="1">
-                <button class="btn btn-primary w-100">
-                   Add
-                </button>
+            <div class="d-flex w-100 pb-2">
 
-            </form>
+                <div class="card-footer w-100 flex flex-column justify-content-start d-flex p-0  bg-white border-0 ">
+                    <h5 class="card-title">
+                        {{ product.product }}
+                    </h5>
+
+                    <p class="card-text">
+                        ${{ product.price }}
+                    </p>
+                </div>
+
+                <div class="card-footer w-100 d-flex justify-content-end align-items-start gap-4 bg-white border-0">
+
+                    <form action="{{ url_for('add', product_id=product.id) }}" method="POST">
+                        <input name="quantity" type="hidden" value="1">
+                        <input name="sort_field" type="hidden" value="{{ sort_field }}">
+                        <input name="sort_dir" type="hidden" value="{{ sort_dir }}">
+                        <input name="this_path" type="hidden" value="{{ request.path }}">
+                        <button class="p-0 icon">
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+                    </form>
+
+                    {% if show_link_btn %}
+                    <form action="{{ url_for('product', product_id=product.id) }}" method="POST">
+                        <button class=" p-0 icon">
+                            <i class="bi bi-eye "></i>
+                        </button>
+                    </form>
+                    {% endif %}
+
+                </div>
+            </div>
+
+            {% if not show_link_btn %}
+            <p class="pt-2"> {{product.description}} </p>
+            {% endif %}
+
+
         </div>
+
 
     </div>
 </div>
