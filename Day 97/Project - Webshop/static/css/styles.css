@@ -1,0 +1,33 @@
+.icon {
+ color: #343a40 !important;
+border:none;
+}
+
+.icon i {
+     color: #343a40 !important;
+}
+
+.icon:hover i {
+    color:#adb5bd !important;
+}
+
+
+.icon:hover {
+   color:#adb5bd !important;
+}
+
+
+/* REMOVE BOOTSTRAP FOCUS (alla states) */
+.icon:focus,
+.icon:focus-visible,
+.icon:active,
+.icon.active,
+.icon.show {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* extra safety (Bootstrap btn override) */
+.btn.icon:focus {
+    box-shadow: none !important;
+}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Product{% endblock %}
+{% block content %}
+{% if product %}
+<h1 class="mb-4 pt-5">{{ product.product }}</h1>
+{% endif %}
+
+<div class="w-100 d-flex justify-content-center align-items-center" style="min-height: 75vh;">
+    {% if product %}
+    {% include "product_card.html" %}
+    {% else %}
+    <div class="alert">
+    No product found
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

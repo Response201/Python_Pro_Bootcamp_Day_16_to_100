@@ -21,14 +21,17 @@ with app.app_context():
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    sort_field = "price"
-    sort_dir = "asc"
+    sort_field = request.args.get("sort_field", "price")
+    sort_dir = request.args.get("sort_dir", "asc")
+
     if request.method == "POST":
         sort_field = request.form.get("sort_field") or request.form.get("current_sort_field") or sort_field
         sort_dir = request.form.get("sort_dir") or request.form.get("current_sort_dir") or sort_dir
+
     return render_template(
         "index.html",
         products=get_products(Product, sort_field=sort_field, sort_dir=sort_dir),
+        show_link_btn = True,
         cart_count=count_cart(Cart),
         sort_field=sort_field,
         sort_dir=sort_dir
@@ -49,11 +52,24 @@ def cart():
 
 @app.post("/add/<int:product_id>")
 def add(product_id):
+
+    sort_field = request.form.get("sort_field") or request.form.get("current_sort_field")
+    sort_dir = request.form.get("sort_dir") or request.form.get("current_sort_dir")
+
+
     add_to_cart(db,
                 cart=get_cart(Cart),
                 product=get_product(Product(), product_id),
                 cart_item=CartItem,
                 quantity=int(request.form["quantity"]))
+
+    if sort_dir and sort_field:
+        return redirect(
+            request.form.get("this_path", "/").split("?")[0]
+            + f"?sort_field={sort_field}"
+            + f"&sort_dir={sort_dir}"
+        )
+
     return redirect(request.form.get("this_path", "/"))
 
 
@@ -61,9 +77,9 @@ def add(product_id):
 @app.post("/remove/<int:product_id>")
 def remove(product_id):
     remove_from_cart(db,
-                           cart=get_cart(Cart),
-                           product=get_product(Product(), product_id),
-                           cart_item=CartItem,
+                     cart=get_cart(Cart),
+                     product=get_product(Product(), product_id),
+                     cart_item=CartItem,
                            )
     return redirect(request.form.get("this_path", "/"))
 
@@ -78,6 +94,19 @@ def delete(product_id):
                      )
     return redirect(request.form.get("this_path", "/"))
 
+
+
+@app.route("/product/<int:product_id>",methods=["GET", "POST"] )
+def product(product_id):
+
+
+    return render_template(
+        "product.html",
+        product=get_product(Product(), product_id),
+        show_link_btn=False,
+        cart_count=count_cart(Cart),
+
+    )
 
 
 
