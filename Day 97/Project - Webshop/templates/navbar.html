@@ -3,9 +3,9 @@
         <a class="navbar-brand" href="{{ url_for('home') }}">
             Webshop
         </a>
-
-        <div class="ms-auto">
-            <a href="{{ url_for('cart') }}"
+{% if user %}
+        <div class="ms-auto px-3">
+            <a href="{{ url_for('cart.cart_view') }}"
                class="btn btn-outline-light position-relative">
                 <i class="bi bi-cart3"></i>
 
@@ -16,5 +16,21 @@
                 {% endif %}
             </a>
         </div>
+
+          <a  href="{{ url_for('user.logout') }}" class="link" >
+
+           Log Out
+
+        </a>
+
+
+        {% else %}
+         <a href="{{ url_for('user.login') }}" class="link"  >
+
+           Log in
+
+        </a>
+
+     {% endif %}
     </div>
 </nav>

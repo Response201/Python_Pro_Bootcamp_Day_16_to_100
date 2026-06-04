@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="box">
+  <h1 class="mb-4 pt-5">Login</h1>
+
+
+
+
+
+
+  <form action="{{ url_for('user.login') }}" method="post">
+    <input type="text" name="username" placeholder="Username" required="required" />
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      required="required"
+    />
+    <button type="submit" class="btn btn-primary btn-block btn-large">
+      Let me in.
+    </button>
+  </form>
+
+      <a href="{{ url_for('user.register') }}" class="linkDark"  >
+
+           Create account
+
+        </a>
+
+</div>
+{% include "flash_message.html" %}
+{% endblock %}

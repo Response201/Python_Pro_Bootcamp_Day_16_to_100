@@ -1,41 +1,50 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from flask_login import UserMixin
 from sqlalchemy import Integer, String, ForeignKey
+from sqlalchemy.orm import relationship, mapped_column
+
+db = SQLAlchemy()
 
 
+class User(db.Model, UserMixin):
+    __tablename__ = "user"
+    id = mapped_column(Integer, primary_key=True)
+    username = mapped_column(String(30), unique=True, nullable=False)
+    password = mapped_column(String(200), nullable=False)
 
-def database(app):
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///webshop.db"
-    db = SQLAlchemy(app)
-
-    class Product(db.Model):
-        __tablename__ = "product"
-        id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-        product: Mapped[str] = mapped_column(String(40), nullable=False)
-        description: Mapped[str] = mapped_column(String(500), nullable=True)
-        image: Mapped[str] = mapped_column(String(), nullable=False)
-        price: Mapped[str] = mapped_column(Integer, nullable=False)
+    cart = relationship("Cart", back_populates="user", uselist=False)
 
 
-    class Cart(db.Model):
-        __tablename__ = "cart"
-        id: Mapped[int] = mapped_column(Integer, primary_key=True)
-        items = relationship("CartItem", back_populates="cart")
+class Product(db.Model):
+    __tablename__ = "product"
+    id = mapped_column(Integer, primary_key=True)
+    product = mapped_column(String(40))
+    description = mapped_column(String(500))
+    image = mapped_column(String())
+    price = mapped_column(Integer)
 
 
-    class CartItem(db.Model):
-        __tablename__ = "cart_item"
-        id: Mapped[int] = mapped_column(Integer, primary_key=True)
-        cart_id: Mapped[int] = mapped_column(ForeignKey("cart.id"))
-        product_id: Mapped[int] = mapped_column(ForeignKey("product.id"))
-        quantity: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
-        cart = relationship("Cart", back_populates="items")
-        product = relationship("Product")
+class Cart(db.Model):
+    __tablename__ = "cart"
+    id = mapped_column(Integer, primary_key=True)
+    user_id = mapped_column(ForeignKey("user.id"), unique=True)
+
+    user = relationship("User", back_populates="cart")
+    items = relationship("CartItem", back_populates="cart")
 
 
-    with app.app_context():
-        db.create_all()
+class CartItem(db.Model):
+    __tablename__ = "cart_item"
+    id = mapped_column(Integer, primary_key=True)
+    cart_id = mapped_column(ForeignKey("cart.id"))
+    product_id = mapped_column(ForeignKey("product.id"))
+    quantity = mapped_column(Integer, default=1)
 
-    return db, Product, Cart, CartItem
+    cart = relationship("Cart", back_populates="items")
+    product = relationship("Product")
 
+
+def init_db(app):
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///webshop.db"
+    db.init_app(app)
+    return db, User, Product, Cart, CartItem

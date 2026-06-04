@@ -1,7 +1,7 @@
+from werkzeug.security import generate_password_hash
 
 
-def seed_database(db, Product, Cart, CartItem):
-
+def seed_database(db, User, Product, Cart, CartItem):
 
     if not db.session.query(Product).first():
         db.session.add_all([
@@ -26,21 +26,29 @@ def seed_database(db, Product, Cart, CartItem):
         ])
         db.session.commit()
 
-    cart = db.session.query(Cart).first()
+    user = db.session.query(User).first()
 
+    if not user:
+        user = User(
+            username="admin",
+            password=generate_password_hash("1234")
+        )
+        db.session.add(user)
+        db.session.commit()
 
+    cart = db.session.query(Cart).filter_by(user_id=user.id).first()
 
     if not cart:
-        cart = Cart()
+        cart = Cart(user_id=user.id)
         db.session.add(cart)
         db.session.commit()
 
         laptop = db.session.query(Product).filter_by(product="Laptop").first()
-        mouse = db.session.query(Product).filter_by(product="Mus").first()
+        mouse = db.session.query(Product).filter_by(product="Mouse").first()
 
         db.session.add_all([
             CartItem(cart_id=cart.id, product_id=laptop.id, quantity=1),
             CartItem(cart_id=cart.id, product_id=mouse.id, quantity=2),
         ])
 
-        db.session.commit()
+    db.session.commit()

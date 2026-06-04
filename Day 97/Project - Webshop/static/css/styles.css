@@ -17,7 +17,7 @@ border:none;
 }
 
 
-/* REMOVE BOOTSTRAP FOCUS (alla states) */
+
 .icon:focus,
 .icon:focus-visible,
 .icon:active,
@@ -27,7 +27,19 @@ border:none;
     box-shadow: none !important;
 }
 
-/* extra safety (Bootstrap btn override) */
+
 .btn.icon:focus {
     box-shadow: none !important;
+}
+
+
+.link{
+text-decoration: none;
+color:#adb5bd !important;
+
+}
+.linkDark{
+text-decoration: none;
+color: #343a40 !important;
+
 }

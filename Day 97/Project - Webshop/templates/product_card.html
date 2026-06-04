@@ -20,19 +20,19 @@
                 </div>
 
                 <div class="card-footer w-100 d-flex justify-content-end align-items-start gap-4 bg-white border-0">
-
-                    <form action="{{ url_for('add', product_id=product.id) }}" method="POST">
+                    {% if user %}
+                    <form action="{{ url_for('cart.add', product_id=product.id) }}" method="POST">
                         <input name="quantity" type="hidden" value="1">
-                        <input name="sort_field" type="hidden" value="{{ sort_field }}">
-                        <input name="sort_dir" type="hidden" value="{{ sort_dir }}">
-                        <input name="this_path" type="hidden" value="{{ request.path }}">
+<input type="hidden" name="sort_field" value="{{ sort_field }}">
+<input type="hidden" name="sort_dir" value="{{ sort_dir }}">
+<input type="hidden" name="this_path" value="{{ request.full_path }}">
                         <button class="p-0 icon">
                             <i class="bi bi-cart-plus"></i>
                         </button>
                     </form>
-
+                    {% endif %}
                     {% if show_link_btn %}
-                    <form action="{{ url_for('product', product_id=product.id) }}" method="POST">
+                    <form action="{{ url_for('product.product', product_id=product.id) }}" method="POST">
                         <button class=" p-0 icon">
                             <i class="bi bi-eye "></i>
                         </button>

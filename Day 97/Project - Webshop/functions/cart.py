@@ -1,14 +1,18 @@
-def get_cart(cart):
-    current_cart = cart.query.first()
+def get_cart(cart, user_id):
 
+    current_cart = cart.query.filter_by(user_id=user_id).first()
+    print("HEJ",current_cart)
     if not current_cart:
         return None
 
     return current_cart
 
 
-def get_total_price(cart):
-    current_cart = cart.query.first()
+def get_total_price(cart,user_id):
+    current_cart = cart.query.filter_by(user_id=user_id).first()
+
+    print(current_cart)
+
     if not current_cart:
 
         return  0
@@ -21,9 +25,10 @@ def get_total_price(cart):
     return total_price
 
 
-def count_cart(cart):
+def count_cart(cart, user_id):
+    if user_id:
         item_count = 0
-        cart_count = cart.query.get(1)
+        cart_count = cart.query.filter_by(user_id=user_id).first()
 
         if not cart_count:
             return 0

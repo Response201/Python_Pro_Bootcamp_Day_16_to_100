@@ -25,7 +25,7 @@
                 <div class="btn-group gap-1">
 
                     <!-- add -->
-                    <form method="POST" action="{{ url_for('add', product_id=item.product.id) }}">
+                    <form method="POST" action="{{ url_for('cart.add', product_id=item.product.id) }}">
                         <input type="hidden" name="this_path" value="{{ request.path }}">
                         <input type="hidden" name="quantity" value="1">
                      <button class="btn icon">
@@ -34,7 +34,7 @@
                     </form>
 
                     <!-- remove -->
-                    <form method="POST" action="{{ url_for('remove', product_id=item.product.id) }}">
+                    <form method="POST" action="{{ url_for('cart.remove', product_id=item.product.id) }}">
                         <input type="hidden" name="this_path" value="{{ request.path }}">
                         <button class="btn icon">
                           <i class="bi bi-dash"></i>
@@ -42,7 +42,7 @@
                     </form>
 
                     <!-- delete -->
-                    <form method="POST" action="{{ url_for('delete', product_id=item.product.id) }}">
+                    <form method="POST" action="{{ url_for('cart.delete', product_id=item.product.id) }}">
                         <input type="hidden" name="this_path" value="{{ request.path }}">
                         <button class="btn icon">
                            <i class="bi bi-trash3"></i>
