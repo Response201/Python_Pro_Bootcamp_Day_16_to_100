@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect
 from flask_login import login_required, current_user
-from functions.cart import  get_cart,count_cart,add_to_cart,get_total_price, remove_from_cart,delete_from_cart
+from functions.cart import get_cart, count_cart, add_to_cart, get_total_price, remove_from_cart, delete_from_cart, \
+    user_cart, check_out_cart
 from functions.product import get_product
 from database import db, Cart, Product, CartItem
 
@@ -22,13 +23,17 @@ def cart_view():
 @cart_end.post("/add/<int:product_id>")
 @login_required
 def add(product_id):
-    product = get_product(Product, product_id)
 
     sort_field = request.form.get("sort_field") or request.form.get("current_sort_field")
     sort_dir = request.form.get("sort_dir") or request.form.get("current_sort_dir")
+
+    cart = user_cart(db, cart=Cart, user_id=current_user.id)
+
+    product = get_product(Product, product_id)
+
     add_to_cart(
         db,
-        cart=get_cart(Cart, current_user.id),
+        cart=cart,
         product=product,
         cart_item=CartItem,
         quantity=int(request.form.get("quantity", 1))
@@ -64,5 +69,15 @@ def delete(product_id):
         product=product,
         cart_item=CartItem
     )
+
+    return redirect(request.form.get("this_path", "/"))
+
+
+
+@cart_end.post("/checkout")
+@login_required
+def check_out():
+    check_out_cart(db,cart_item=CartItem,cart=get_cart(Cart, current_user.id))
+
 
     return redirect(request.form.get("this_path", "/"))

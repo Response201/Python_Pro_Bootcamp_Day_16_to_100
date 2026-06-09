@@ -52,6 +52,7 @@ def home():
         products=get_products(Product, sort_field, sort_dir),
         cart_count=count_cart(Cart, user_id),
         user=current_user.is_authenticated,
+        username = current_user.username if current_user.is_authenticated else "",
         show_link_btn=True,
         sort_field=sort_field,
         sort_dir=sort_dir

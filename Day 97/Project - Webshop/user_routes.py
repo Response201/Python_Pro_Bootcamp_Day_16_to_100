@@ -25,11 +25,8 @@ def register():
 
         db.session.add(new_user)
         db.session.commit()
-
-        cart = Cart(user_id=new_user.id)
-        db.session.add(cart)
-        db.session.commit()
         login_user(new_user)
+
         return redirect("/")
 
     return render_template("register.html")
