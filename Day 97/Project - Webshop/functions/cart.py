@@ -1,7 +1,29 @@
+def user_cart(db, cart, user_id):
+    current_cart = db.session.query(cart).filter_by(user_id=user_id).first()
+
+    if not current_cart or current_cart is None:
+        current_cart = cart(user_id=user_id)
+        db.session.add(current_cart)
+        db.session.commit()
+
+    return current_cart
+
+
+def delete_user_cart(db,cart_item,cart):
+
+    existing_products = cart_item.query.filter_by(cart_id=cart.id).all()
+
+    for product in existing_products:
+        db.session.delete(product)
+
+    db.session.delete(cart)
+    db.session.commit()
+
+
 def get_cart(cart, user_id):
 
     current_cart = cart.query.filter_by(user_id=user_id).first()
-    print("HEJ",current_cart)
+
     if not current_cart:
         return None
 
@@ -10,8 +32,6 @@ def get_cart(cart, user_id):
 
 def get_total_price(cart,user_id):
     current_cart = cart.query.filter_by(user_id=user_id).first()
-
-    print(current_cart)
 
     if not current_cart:
 
@@ -41,9 +61,7 @@ def count_cart(cart, user_id):
 
 def add_to_cart(db,cart, product, cart_item, quantity):
 
-    if cart.id is None:
-        db.session.add(cart)
-        db.session.commit()
+
 
     existing_product = cart_item.query.filter_by(cart_id=cart.id,product_id=product.id ).first()
 

@@ -14,10 +14,18 @@ Cart
         {% endfor %}
 
         <div class="card mt-4">
-            <div class="card-body">
+            <div class="card-body d-flex justify-content-between">
                 <strong class="fs-3">
                     Total: ${{ total_price }}
                 </strong>
+
+
+                 <form method="POST" action="{{ url_for('cart.check_out') }}">
+                        <input type="hidden" name="this_path" value="{{ request.path }}">
+                        <button class="btn icon border">
+                           Check out
+                        </button>
+                    </form>
             </div>
         </div>
 
