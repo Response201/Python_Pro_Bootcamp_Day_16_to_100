@@ -1,6 +1,8 @@
+from uuid import uuid4
+
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
-from sqlalchemy import Integer, String, ForeignKey
+from sqlalchemy import Integer, String, ForeignKey, Float, JSON
 from sqlalchemy.orm import relationship, mapped_column
 
 db = SQLAlchemy()
@@ -42,6 +44,21 @@ class CartItem(db.Model):
 
     cart = relationship("Cart", back_populates="items")
     product = relationship("Product")
+
+
+
+
+class Receipt(db.Model):
+    __tablename__ = "receipt"
+
+    id = mapped_column(Integer, primary_key=True)
+    order_number = mapped_column(String(20), unique=True, nullable=False)
+    user_id = mapped_column(ForeignKey("user.id"), nullable=False)
+    total_price = mapped_column(Float, nullable=False)
+    products = mapped_column(JSON, nullable=False)
+
+    user = relationship("User")
+
 
 
 def init_db(app):

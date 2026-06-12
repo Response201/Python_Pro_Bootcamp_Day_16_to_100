@@ -3,7 +3,8 @@ from flask_login import login_required, current_user
 from functions.cart import get_cart, count_cart, add_to_cart, get_total_price, remove_from_cart, delete_from_cart, \
     user_cart, delete_user_cart
 from functions.product import get_product
-from database import db, Cart, Product, CartItem
+from functions.receipt import create_receipt
+from database import db, Cart, Product, CartItem, Receipt
 import os
 import stripe
 from dotenv import load_dotenv
@@ -119,7 +120,7 @@ def check_out():
 @login_required
 def payment_success():
     print("BETALNING GENOMFÖRD!")
-
+    create_receipt(db, receipt=Receipt, cart=get_cart(Cart, current_user.id), user=current_user.id)
     delete_user_cart(db,cart_item=CartItem,cart=get_cart(Cart, current_user.id))
 
     return redirect("/")

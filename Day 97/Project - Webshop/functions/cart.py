@@ -105,3 +105,4 @@ def delete_from_cart(db,cart, product, cart_item):
 
 
     db.session.commit()
+

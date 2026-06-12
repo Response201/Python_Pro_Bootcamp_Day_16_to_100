@@ -9,6 +9,7 @@ from database import  init_db
 from seed_database import seed_database
 from cart_routes import cart_end
 from product_routes import product_end
+from receipt_routes import receipt_end
 from user_routes import user_end
 load_dotenv()
 
@@ -25,10 +26,11 @@ with app.app_context():
 app.register_blueprint(cart_end)
 app.register_blueprint(product_end)
 app.register_blueprint(user_end)
+app.register_blueprint(receipt_end)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = "login"
+login_manager.login_view = "user.login"
 
 
 @login_manager.user_loader

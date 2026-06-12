@@ -34,6 +34,7 @@ border:none;
 
 
 .link{
+
 text-decoration: none;
 color:#adb5bd !important;
 
@@ -41,5 +42,22 @@ color:#adb5bd !important;
 .linkDark{
 text-decoration: none;
 color: #343a40 !important;
+
+}
+
+.flashContainer{
+height:1.75rem;
+}
+
+.linkUser{
+text-decoration: none;
+color: #343a40 !important;
+border:none !important;
+
+}
+.linkUser:hover{
+text-decoration: none;
+color:#adb5bd !important;
+border:none !important;
 
 }

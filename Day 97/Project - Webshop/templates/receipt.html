@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Receipt{% endblock %}
+{% block content %}
+
+<h1 class="mb-4 pt-5">
+    Receipt
+</h1>
+
+<div class="card">
+
+    <div class="card-body">
+
+        <h4>
+            Order #{{ receipt.order_number }}
+        </h4>
+
+        <hr>
+
+       {% for product in receipt.products %}
+
+<div class="d-flex justify-content-between" >
+
+    <div>
+        <strong>
+            {{ product.product }}
+        </strong>
+
+        <div class="text-muted">
+            Quantity: {{ product.quantity }}
+        </div>
+    </div>
+
+        <div >
+<strong>
+        ${{ product.price }}
+</strong>
+        {% if product.quantity > 1 %}
+                <small class="text-muted">
+                    (${{ product.quantity * product.price }})
+                </small>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+        <hr>
+
+        <div class="d-flex justify-content-between">
+
+            <strong class="fs-4">
+                Total
+            </strong>
+
+            <strong class="fs-4">
+                ${{ receipt.total_price }}
+            </strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
