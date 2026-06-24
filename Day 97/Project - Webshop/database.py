@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     id = mapped_column(Integer, primary_key=True)
     username = mapped_column(String(30), unique=True, nullable=False)
     password = mapped_column(String(200), nullable=False)
+    role = mapped_column(String(20), default="user")
 
     cart = relationship("Cart", back_populates="user", uselist=False)
 
@@ -24,6 +25,7 @@ class Product(db.Model):
     description = mapped_column(String(500))
     image = mapped_column(String())
     price = mapped_column(Integer)
+    stock_quantity = mapped_column(Integer)
 
 
 class Cart(db.Model):

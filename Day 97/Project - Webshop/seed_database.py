@@ -9,19 +9,22 @@ def seed_database(db, User, Product, Cart, CartItem):
                 product="Laptop",
                 image="https://images.pexels.com/photos/20487289/pexels-photo-20487289.jpeg",
                 price=12000,
-                description="A powerful laptop with high performance, ideal for work, studies, and gaming."
+                description="A powerful laptop with high performance, ideal for work, studies, and gaming.",
+                stock_quantity = 3
             ),
             Product(
                 product="Mouse",
                 image="https://images.pexels.com/photos/14363329/pexels-photo-14363329.jpeg",
                 price=299,
-                description="An ergonomic wireless mouse with high precision and long battery life."
+                description="An ergonomic wireless mouse with high precision and long battery life.",
+                stock_quantity = 2
             ),
             Product(
                 product="Keyboard",
                 image="https://images.pexels.com/photos/35471659/pexels-photo-35471659.jpeg",
                 price=799,
-                description="A mechanical keyboard with fast response and a comfortable typing experience."
+                description="A mechanical keyboard with fast response and a comfortable typing experience.",
+                stock_quantity = 5
             ),
         ])
         db.session.commit()
@@ -31,7 +34,8 @@ def seed_database(db, User, Product, Cart, CartItem):
     if not user:
         user = User(
             username="admin",
-            password=generate_password_hash("1234")
+            password=generate_password_hash("1234"),
+            role = "admin"
         )
         db.session.add(user)
         db.session.commit()

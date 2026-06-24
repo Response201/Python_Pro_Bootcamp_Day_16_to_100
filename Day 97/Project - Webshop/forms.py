@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField
+from wtforms import StringField, SubmitField, PasswordField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, Length
 
 
@@ -25,3 +25,30 @@ class AuthForm(FlaskForm):
     def __init__(self, *args, submit_text="Let me in", **kwargs):
         super().__init__(*args, **kwargs,  )
         self.submit.label.text = submit_text
+
+
+
+
+
+class ProductForm(FlaskForm):
+
+    product = StringField(
+        "Product name",
+        validators=[DataRequired(), Length(min=2, max=100)]
+    )
+
+    description = TextAreaField("Description")
+
+    image = StringField("Image URL")
+
+    price = IntegerField(
+        "Price",
+        validators=[DataRequired()]
+    )
+
+    stock_quantity = IntegerField(
+        "Stock quantity",
+        validators=[DataRequired()]
+    )
+
+    submit = SubmitField("Save product")

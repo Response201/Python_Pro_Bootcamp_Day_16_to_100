@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, jsonify, url_fo
 from flask_login import login_required, current_user
 from functions.cart import get_cart, count_cart, add_to_cart, get_total_price, remove_from_cart, delete_from_cart, \
     user_cart, delete_user_cart
-from functions.product import get_product
+from functions.product import get_product, change_stock_quantity
 from functions.receipt import create_receipt
 from database import db, Cart, Product, CartItem, Receipt
 import os
@@ -37,15 +37,15 @@ def add(product_id):
 
     cart = user_cart(db, cart=Cart, user_id=current_user.id)
 
-    product = get_product(Product, product_id)
-
-    add_to_cart(
-        db,
-        cart=cart,
-        product=product,
-        cart_item=CartItem,
-        quantity=int(request.form.get("quantity", 1))
-    )
+    product = change_stock_quantity(db,Product, product_id, action="increase")
+    if product:
+        add_to_cart(
+            db,
+            cart=cart,
+            product=product,
+            cart_item=CartItem,
+            quantity=int(request.form.get("quantity", 1))
+        )
 
     base = request.form.get("this_path", "/").split("?")[0]
 
@@ -54,7 +54,7 @@ def add(product_id):
 @cart_end.post("/remove/<int:product_id>")
 @login_required
 def remove(product_id):
-    product = get_product(Product, product_id)
+    product = change_stock_quantity(db,Product, product_id, action="decrease")
 
     remove_from_cart(
         db,
@@ -69,14 +69,17 @@ def remove(product_id):
 @cart_end.post("/delete/<int:product_id>")
 @login_required
 def delete(product_id):
-    product = get_product(Product, product_id)
 
-    delete_from_cart(
-        db,
-        cart=get_cart(Cart, current_user.id),
-        product=product,
-        cart_item=CartItem
-    )
+    cart = get_cart(Cart, current_user.id)
+    if cart:
+        product = change_stock_quantity(db,Product, product_id, action="delete", cart=cart)
+
+        delete_from_cart(
+            db,
+            cart=get_cart(Cart, current_user.id),
+            product=product,
+            cart_item=CartItem
+        )
 
     return redirect(request.form.get("this_path", "/"))
 

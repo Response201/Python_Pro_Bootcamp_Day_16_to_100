@@ -5,6 +5,14 @@
         </a>
 {% if user %}
         <div class="ms-auto px-3">
+
+
+                         {% if current_user.is_authenticated and current_user.role == "admin" %}
+    <a href="{{ url_for('product.add_product') }}" class="link me-2">Add product</a>
+
+{% endif %}
+
+
             <a href="{{ url_for('cart.cart_view') }}"
                class="btn btn-outline-light position-relative">
                 <i class="bi bi-cart3"></i>

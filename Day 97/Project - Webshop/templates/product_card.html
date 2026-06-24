@@ -15,21 +15,40 @@
                     </h5>
 
                     <p class="card-text">
-                        ${{ product.price }}
+                        ${{ product.price }} ({{ product.stock_quantity }} in stock)
                     </p>
                 </div>
 
-                <div class="card-footer w-100 d-flex justify-content-end align-items-start gap-4 bg-white border-0">
+                <div class="card-footer w-100 d-flex  flex-wrap justify-content-end align-items-start gap-3 bg-white border-0">
                     {% if user %}
+
+                    {% if current_user.is_authenticated and current_user.role == "admin" %}
+
+
+                    <a class="linkDark" href="{{ url_for('product.edit_product', product_id=product.id) }}">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    {% endif %}
+
+
+                    {% if product.stock_quantity > 0 %}
                     <form action="{{ url_for('cart.add', product_id=product.id) }}" method="POST">
                         <input name="quantity" type="hidden" value="1">
-<input type="hidden" name="sort_field" value="{{ sort_field }}">
-<input type="hidden" name="sort_dir" value="{{ sort_dir }}">
-<input type="hidden" name="this_path" value="{{ request.full_path }}">
+                        <input name="sort_field" type="hidden" value="{{ sort_field }}">
+                        <input name="sort_dir" type="hidden" value="{{ sort_dir }}">
+                        <input name="this_path" type="hidden" value="{{ request.full_path }}">
                         <button class="p-0 icon">
                             <i class="bi bi-cart-plus"></i>
                         </button>
                     </form>
+                    {% else %}
+                    <div class="p-0 text-muted opacity-50">
+                        <i class="bi bi-cart-x"></i>
+                    </div>
+
+
+                    {% endif %}
+
                     {% endif %}
                     {% if show_link_btn %}
                     <form action="{{ url_for('product.product', product_id=product.id) }}" method="POST">

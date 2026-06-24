@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center pt-4"
+     style="height:85vh; min-height:fit-content;">
+
+    <div class="card shadow-sm p-4" style="max-width: 600px; width: 100%;">
+
+        <h2 class="my-3">{{ title }}</h2>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.product.label }}
+                {{ form.product(class="form-control") }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.description.label }}
+                {{ form.description(class="form-control") }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.image.label }}
+                {{ form.image(class="form-control") }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.price.label }}
+                {{ form.price(class="form-control") }}
+            </div>
+
+            <div>
+                {{ form.stock_quantity.label }}
+                {{ form.stock_quantity(class="form-control") }}
+            </div>
+
+
+            <div class="d-flex justify-content-end gap-3 mb-2 mt-4">
+
+
+                <button class="btn icon border" type="submit">
+                    {{ button_text }}
+                </button>
+
+                {% if product %}
+
+
+                <button class="btn border icon btn-outline"
+                        formaction="{{ url_for('product.delete_product', product_id=product.id) }}"
+                        formmethod="POST"
+                        type="submit">
+
+                    Delete
+
+                </button>
+
+                {% endif %}
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

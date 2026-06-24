@@ -25,27 +25,36 @@
                 <div class="btn-group gap-1">
 
                     <!-- add -->
-                    <form method="POST" action="{{ url_for('cart.add', product_id=item.product.id) }}">
-                        <input type="hidden" name="this_path" value="{{ request.path }}">
-                        <input type="hidden" name="quantity" value="1">
-                     <button class="btn icon">
-    <i class="bi bi-plus"></i>
-</button>
+                    {% if item.product.stock_quantity > 0 %}
+
+                    <form action="{{ url_for('cart.add', product_id=item.product.id) }}" method="POST">
+                        <input name="this_path" type="hidden" value="{{ request.path }}">
+                        <input name="quantity" type="hidden" value="1">
+                        <button class="btn icon">
+                            <i class="bi bi-plus"></i>
+                        </button>
                     </form>
+                    {% else %}
+
+
+                    <button class="btn icon text-muted opacity-50" disabled>
+                        <i class="bi bi-cart-x"></i>
+                    </button>
+                    {% endif %}
 
                     <!-- remove -->
-                    <form method="POST" action="{{ url_for('cart.remove', product_id=item.product.id) }}">
-                        <input type="hidden" name="this_path" value="{{ request.path }}">
+                    <form action="{{ url_for('cart.remove', product_id=item.product.id) }}" method="POST">
+                        <input name="this_path" type="hidden" value="{{ request.path }}">
                         <button class="btn icon">
-                          <i class="bi bi-dash"></i>
+                            <i class="bi bi-dash"></i>
                         </button>
                     </form>
 
                     <!-- delete -->
-                    <form method="POST" action="{{ url_for('cart.delete', product_id=item.product.id) }}">
-                        <input type="hidden" name="this_path" value="{{ request.path }}">
+                    <form action="{{ url_for('cart.delete', product_id=item.product.id) }}" method="POST">
+                        <input name="this_path" type="hidden" value="{{ request.path }}">
                         <button class="btn icon">
-                           <i class="bi bi-trash3"></i>
+                            <i class="bi bi-trash3"></i>
                         </button>
                     </form>
 
