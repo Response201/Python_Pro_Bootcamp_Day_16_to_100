@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, flash, url_for
 from flask_login import login_required, current_user, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from database import db, Cart, User
+from database import db
+from models import User
 from forms import AuthForm
 
 user_end = Blueprint("user", __name__)

@@ -4,7 +4,11 @@ from functions.cart import count_cart, get_total_price
 from functions.product import get_product
 from forms import ProductForm
 from functions.auth import admin_required
-from database import db, Cart, Product
+from database import db
+from models import Cart, Product
+
+
+
 product_end = Blueprint("product", __name__)
 
 @product_end.route("/product/<int:product_id>", methods=["GET","POST"])

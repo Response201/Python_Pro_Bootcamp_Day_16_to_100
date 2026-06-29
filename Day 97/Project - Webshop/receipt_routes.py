@@ -1,9 +1,10 @@
-import requests
 from flask import Blueprint, render_template
 from flask_login import current_user, login_required
 from functions.receipt import get_all_receipts, get_receipt
 from functions.cart import count_cart
-from database import  Receipt, Cart
+from models import Cart, Receipt
+
+
 
 receipt_end = Blueprint("receipt", __name__)
 

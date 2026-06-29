@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, jsonify, url_for
+from flask import Blueprint, render_template, request, redirect,  url_for
 from flask_login import login_required, current_user
 from functions.cart import get_cart, count_cart, add_to_cart, get_total_price, remove_from_cart, delete_from_cart, \
     user_cart, delete_user_cart
-from functions.product import get_product, change_stock_quantity
+from functions.product import  change_stock_quantity
 from functions.receipt import create_receipt
-from database import db, Cart, Product, CartItem, Receipt
+from database import db
+from models import Cart, Product, CartItem, Receipt
 import os
 import stripe
 from dotenv import load_dotenv

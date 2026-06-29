@@ -1,7 +1,8 @@
 from werkzeug.security import generate_password_hash
+from database import db
+from models import User,Cart, Product, CartItem
 
-
-def seed_database(db, User, Product, Cart, CartItem):
+def seed_database():
 
     if not db.session.query(Product).first():
         db.session.add_all([
