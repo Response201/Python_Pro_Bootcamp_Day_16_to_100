@@ -5,7 +5,7 @@ from functions.product import get_product
 from forms import ProductForm
 from functions.auth import admin_required
 from database import db
-from models import Cart, Product
+from models import Cart, Product, CartItem
 
 
 
@@ -97,6 +97,7 @@ def delete_product(product_id):
 
     product =  get_product(Product, product_id)
     if product:
+        CartItem.query.filter_by(product_id=product.id).delete()
         db.session.delete(product)
         db.session.commit()
 
